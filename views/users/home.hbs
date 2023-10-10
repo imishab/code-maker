@@ -1,0 +1,376 @@
+<section>
+    <div class="container mt-2">
+
+        <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-whatever="@mdo">Add Variables</button>
+        <div class="row mt-5">
+            {{#each products}}
+            <div class="card p-3 mb-3 shadow mb-3 bg-white rounded">
+                <div class="card-body">
+                    <h5 class="mb-3 text-success">{{this.Mainname}}</h5>
+
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-heading{{this.Mainname}}">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapse{{this.Mainname}}" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapse{{this.Mainname}}">
+                                    Collection.js
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapse{{this.Mainname}}" class="accordion-collapse collapse"
+                                aria-labelledby="panelsStayOpen-heading{{this.Mainname}}">
+                                <div class="accordion-body" style="background-color: blanchedalmond;">
+                                    <button class="btn btn-sm btn-dark" onclick="copyContent()"
+                                        id="copyButton">Copy</button><br><br>
+                                    <div class="card py-3">
+                                        <code id="myText"
+                                            style="padding-left: 15px;">{{this.CVname}}_COLLECTION: "{{this.Cname}}";</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-heading{{this.Mainname}}2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapse{{this.Mainname}}2" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapse{{this.Mainname}}2">
+                                adminHelper.js
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapse{{this.Mainname}}2" class="accordion-collapse collapse"
+                            aria-labelledby="panelsStayOpen-heading{{this.Mainname}}2">
+                            <div class="accordion-body" style="background-color: blanchedalmond;">
+                                <button class="btn btn-sm btn-dark" onclick="copyContent()"
+                                    id="copyButton">Copy</button><br><br>
+                                <div class="card py-3">
+                                    <code id="myText2" style="padding-left: 15px;">
+                                        <pre>
+<font color="green">///////ADD DATA/////////////////////</font>                                         
+  add{{this.MFname}}: ({{this.Pname}}, callback) => {
+    console.log({{this.Pname}});
+  {{this.Pname}}.Price = parseInt({{this.Pname}}.Price);
+  db.get()
+    .collection(collections.{{CVname}}_COLLECTION)
+    .insertOne({{this.Pname}})
+    .then((data) => {
+      console.log(data);
+      callback(data.ops[0]._id);
+    });
+  },
+
+<font color="green">///////GET ALL DATA/////////////////////</font>                                            
+   getAll{{this.MFnames}}: () => {
+    return new Promise(async (resolve, reject) => {
+      let {{this.MFnames}} = await db
+      .get()
+      .collection(collections.{{CVname}}_COLLECTION)
+      .find()
+      .toArray();
+  resolve({{this.MFnames}});
+    });
+  },
+
+<font color="green">///////ADD DATA DETAILS///////////////////// </font>                                           
+  get{{this.MFname}}Details: ({{this.Pname}}Id) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collections.{{CVname}}_COLLECTION)
+      .findOne({ _id: objectId({{this.Pname}}Id)
+  })
+      .then((response) => {
+    resolve(response);
+  });
+  });
+  },
+
+<font color="green">///////DELETE DATA/////////////////////   </font>                                         
+  delete{{this.MFname}}: ({{this.Pname}}Id) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collections.{{CVname}}_COLLECTION)
+      .removeOne({ _id: objectId({{this.Pname}}Id)
+  })
+        .then((response) => {
+    console.log(response);
+    resolve(response);
+  });
+    });
+  },
+
+<font color="green">///////UPDATE DATA/////////////////////  </font>                                          
+   update{{this.MFname}}: ({{this.Pname}}Id, {{this.Pname}}Details) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collections.{{CVname}}_COLLECTION)
+      .updateOne(
+        { _id: objectId({{this.Pname}}Id)
+  },
+  {
+    $set: {
+      Name: {{this.Pname}}Details.Name,
+        Category: {{this.Pname}} Details.Category,
+          Price: {{this.Pname}} Details.Price,
+            Description: {{this.Pname}} Details.Description,
+            },
+          }
+        )
+        .then((response) => {
+              resolve();
+            });
+    });
+  },
+
+
+<font color="green">///////DELETE ALL DATA///////////////////// </font>                                           
+  deleteAll{{this.MFnames}}: () => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collections.{{CVname}}_COLLECTION)
+      .remove({})
+      .then(() => {
+        resolve();
+      });
+  });
+  },
+  
+  </pre>
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-heading{{this.Mainname}}3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapse{{this.Mainname}}3" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapse{{this.Mainname}}3">
+                                adminRoute.js
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapse{{this.Mainname}}3" class="accordion-collapse collapse"
+                            aria-labelledby="panelsStayOpen-heading{{this.Mainname}}3">
+                            <div class="accordion-body" style="background-color: blanchedalmond;">
+                                <button class="btn btn-sm btn-dark" onclick="copyContent()"
+                                    id="copyButton">Copy</button><br><br>
+                                <div class="card py-3">
+                                    <code id="myText3" style="padding-left: 15px;">
+                                        <pre>
+<font color="green">///////ALL DATA///////////////////// </font>                                        
+   router.get("/all-products", verifySignedIn, function (req, res) {
+    let administator = req.session.admin;
+    adminHelper.getAllProducts().then((products) => {
+      res.render("admin/all-products", { admin: true, products, administator });
+    });
+  });
+
+<font color="green">///////ADD DATA///////////////////// </font>                                        
+  router.get("/add-product", verifySignedIn, function (req, res) {
+    let administator = req.session.admin;
+    res.render("admin/add-product", { admin: true, administator });
+  });
+
+<font color="green">///////ADD DATA///////////////////// </font>                                        
+  router.post("/add-product", function (req, res) {
+    adminHelper.addProduct(req.body, (id) => {
+      let image = req.files.Image;
+      image.mv("./public/images/product-images/" + id + ".png", (err, done) => {
+        if (!err) {
+          res.redirect("/admin/add-product");
+        } else {
+          console.log(err);
+        }
+      });
+    });
+  });
+
+<font color="green">///////EDIT DATA///////////////////// </font>                                        
+  router.get("/edit-product/:id", verifySignedIn, async function (req, res) {
+    let administator = req.session.admin;
+    let productId = req.params.id;
+    let product = await adminHelper.getProductDetails(productId);
+    console.log(product);
+    res.render("admin/edit-product", { admin: true, product, administator });
+  });
+
+<font color="green">///////EDIT DATA///////////////////// </font>                                        
+  router.post("/edit-product/:id", verifySignedIn, function (req, res) {
+    let productId = req.params.id;
+    adminHelper.updateProduct(productId, req.body).then(() => {
+      if (req.files) {
+        let image = req.files.Image;
+        if (image) {
+          image.mv("./public/images/product-images/" + productId + ".png");
+        }
+      }
+      res.redirect("/admin/all-products");
+    });
+  });
+
+<font color="green">///////DELETE DATA///////////////////// </font>                                        
+  router.get("/delete-product/:id", verifySignedIn, function (req, res) {
+    let productId = req.params.id;
+    adminHelper.deleteProduct(productId).then((response) => {
+      fs.unlinkSync("./public/images/product-images/" + productId + ".png");
+      res.redirect("/admin/all-products");
+    });
+  });
+
+<font color="green">///////DELETE ALL DATA///////////////////// </font>                                        
+  router.get("/delete-all-products", verifySignedIn, function (req, res) {
+    adminHelper.deleteAllProducts().then(() => {
+      res.redirect("/admin/all-products");
+    });
+  });
+
+                                        </pre>
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+</section>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/add-product" enctype="multipart/form-data" method="POST">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Main Name:</label>
+                        <input type="text" name="Mainname" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="card p-2 shadow p-3 mb-3 bg-white rounded">
+                        <h5 class="text-info">Collection.js</h5>
+
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Collection Variable Name <span
+                                    class="text-danger">(no need of 's')</span>:</label>
+                            <input type="text" name="CVname" class="form-control" id="textInput"
+                                onkeyup="convertToUpperCase(this)">
+                        </div>
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Collection Name <span
+                                    class="text-danger">(no need of 's')</span>:</label>
+                            <input type="text" name="Cname" class="form-control" id="recipient-name">
+                        </div>
+                    </div>
+                    <div class="card p-2 shadow p-3 mb-3 bg-white rounded">
+                        <h5 class="text-info">adminHelper.js</h5>
+
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Main Function Name <span
+                                    class="text-danger">(with 's')</span>:</label>
+                            <input type="text" name="MFnames" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Main Function Name <span
+                                    class="text-danger">(without 's')</span>:</label>
+                            <input type="text" name="MFname" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-2">
+                            <label for="recipient-name" class="col-form-label">Parameter Name:</label>
+                            <input type="text" name="Pname" class="form-control" id="textInput"
+                                onkeyup="convertToLowerCase(this)">
+                        </div>
+
+                    </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Send message</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function convertToUpperCase(input) {
+        input.value = input.value.toUpperCase();
+    }
+    function convertToLowerCase(input) {
+        input.value = input.value.toLowerCase();
+    }
+    ///text1/////////////////////////////////////////////////////
+    let text = document.getElementById('myText').innerHTML;
+    const copyContent = async () => {
+        try {
+            await navigator.clipboard.writeText(text);
+            const button = document.getElementById('copyButton');
+            button.textContent = 'Text Copied!';
+            button.classList.add('copied-button'); // Add the new class
+            console.log('Content copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
+    ///text2/////////////////////////////////////////////////////
+    let text = document.getElementById('myText2').innerHTML;
+    const copyContent = async () => {
+        try {
+            await navigator.clipboard.writeText(text);
+            const button = document.getElementById('copyButton');
+            button.textContent = 'Text Copied!';
+            button.classList.add('copied-button'); // Add the new class
+            console.log('Content copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
+    ///text3/////////////////////////////////////////////////////
+    let text = document.getElementById('myText3').innerHTML;
+    const copyContent = async () => {
+        try {
+            await navigator.clipboard.writeText(text);
+            const button = document.getElementById('copyButton');
+            button.textContent = 'Text Copied!';
+            button.classList.add('copied-button'); // Add the new class
+            console.log('Content copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
+</script>
+
+<script>
+    function addToCart(productId) {
+        $.ajax({
+            url: "/add-to-cart/" + productId,
+            method: "get",
+            success: (response) => {
+                if (response.status) {
+                    let count = $("#cart-count").html();
+                    count = parseInt(count) + 1;
+                    $("#cart-count").html(count);
+                }
+            },
+        });
+    }
+</script>
