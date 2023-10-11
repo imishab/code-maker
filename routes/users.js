@@ -84,6 +84,13 @@ router.post("/add-product", function (req, res) {
   });
 });
 
+router.get("/delete-product/:id", function (req, res) {
+  let productId = req.params.id;
+  adminHelper.deleteProduct(productId).then((response) => {
+    res.redirect("/");
+  });
+});
+
 /////////////////////////////////
 
 router.get("/cart", verifySignedIn, async function (req, res) {
